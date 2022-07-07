@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, createContext } from "react";
+import FunctionContextComponent from "./components/FunctionContextComponent";
+import "./App.css";
+
+export const ThemeContext = createContext(); // am exportat un context crea!!!
 
 function App() {
+  const [darkTheme, setDarkTheme] = useState(true);
+
+  function toggleTheme() {
+    setDarkTheme((prevDarkTheme) => !prevDarkTheme);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <ThemeContext.Provider value={darkTheme}>
+        {/* se uita value destul de usor*/}
+        <button onClick={toggleTheme}>Toggle Theme</button>
+        <FunctionContextComponent />
+        {/* trebuie neaparat sa am componenta inauntru providerului */}
+      </ThemeContext.Provider>
+    </>
   );
 }
 
